@@ -18,23 +18,28 @@ function start() {
 	
 	// create a new scene from code
 	var newScene = new Scene(600, 400);
-	newScene.addGameObject(new GameObject(20, 40));
+	var go = new GameObject(50, 100);
+	go.addComponent(new BoxSprite(50, 50, "#55b24e", go.transform));
+	go.addComponent(new TestScript(go.transform));
+	go.addComponent(new Physics(5));
+	
+	newScene.addGameObject(go);
 	
 	scenes.push(newScene);
 	currScene = 0;
 	
+	scenes[currScene].start();
 	window.requestAnimationFrame(update);
 }
 
 function update() {
 	
 	$("#debug").text("FPS: " + calculateAverageFPS());
-	
 	//console.log("tick:" + Time.time + " -> dt:" + Time.deltaTime);
 	
-	if(currScene !== null) {
-		scenes[currScene].update();
-	}
+	scenes[currScene].update();
+	
+	scenes[currScene].render();
 	
 	Time.updateTime(new Date());
 	window.requestAnimationFrame(update);
