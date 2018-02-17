@@ -8,6 +8,14 @@ class Vector2 {
 		return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
 	}
 	
+	add(v) {
+		return new Vector2(this.x + v.x, this.y + v.y);
+	}
+	
+	subtract(v) {
+		return new Vector2(this.x - v.x, this.y - v.y);
+	}
+	
 	multiply(factor) {
 		return new Vector2(this.x * factor, this.y * factor);
 	}
