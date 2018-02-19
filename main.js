@@ -21,8 +21,8 @@ function start() {
 	var go = new GameObject(50, 100);
 	//go.addComponent(new BoxSprite(50, 50, "#55b24e", go.transform));
 	go.addComponent(new ImageSprite("/Git/engine/Images/gnome.jpg", 0.1, 0.1, 0, 0, go.transform));
-	//go.addComponent(new TestScript(go.transform));
-	go.addComponent(new Physics(5, go.transform));
+	go.addComponent(new TestScript(go.transform));
+	//go.addComponent(new Physics(5, go.transform));
 	
 	newScene.addGameObject(go);
 	

@@ -21,8 +21,8 @@ class TestScript {
 	
 	update() {
 		this.transform.position = Vector2.Lerp(this.transform.position, this.destinations[this.state], this.sSpeed * Time.deltaTime);
-		this.transform.scale = Vector2.Lerp(this.transform.scale, this.destinations[this.state].multiply(0.01), this.sSpeed * Time.deltaTime);
-		
+		//this.transform.scale = Vector2.Lerp(this.transform.scale, this.destinations[this.state].multiply(0.01), this.sSpeed * Time.deltaTime);
+		this.transform.rotation += 1;
 		if(Time.time >= this.changeTime) {
 			this.state += 1;
 			if(this.state > this.destinations.length - 1) {

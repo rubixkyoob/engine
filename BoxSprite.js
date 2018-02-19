@@ -7,10 +7,8 @@ class BoxSprite {
 	}
 	
 	draw() {
-		var c=document.getElementById("mainCanvas");
-		var ctx=c.getContext("2d");
-		ctx.fillStyle=this.color;
-		ctx.fillRect(
+		_context.fillStyle=this.color;
+		_context.fillRect(
 			this.transform.position.x - (this.width * this.transform.scale.x * 0.5),
 			this.transform.position.y - (this.height * this.transform.scale.y * 0.5),
 			this.width * this.transform.scale.x,

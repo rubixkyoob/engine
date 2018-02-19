@@ -30,18 +30,17 @@ class ImageSprite {
 	}
 	
 	draw() {
-		var c=document.getElementById("mainCanvas");
-		var ctx=c.getContext("2d");
-		
+		_context.save();
 		var w = this.img.width * this.width * this.transform.scale.x;
 		var h = this.img.height * this.height * this.transform.scale.y;
-		var x = this.transform.position.x - (w * 0.5) + this.offsetX;
-		var y = this.transform.position.y - (h * 0.5) + this.offsetY;
+		var x = this.transform.position.x;
+		var y = this.transform.position.y;
 		
-		//console.log("(" + x + ", " + y + ")");
-		//console.log("(" + w + ", " + h + ")");
+		_context.translate(x,y);
+		_context.rotate(this.transform.rotation * Math.PI / 180);
 		
-		ctx.drawImage(this.img, x, y, w, h);
+		_context.drawImage(this.img, this.offsetX - (w * 0.5), this.offsetY - (h * 0.5), w, h);
+		_context.restore();
 	}
 	
 }
