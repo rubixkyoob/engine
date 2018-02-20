@@ -20,6 +20,16 @@ class Vector2 {
 		return new Vector2(this.x * factor, this.y * factor);
 	}
 	
+	normalize() {
+		var m = this.magnitude();
+		return new Vector2(this.x / m, this.y / m);
+	}
+	
+	// returns the dot product of the current vector and the given vector
+	dotProduct(v) {
+		return (this.x * v.x) + (this.y * v.y);
+	}
+	
 	static Lerp(start, end, smooth) {
 		var dx = (1 - smooth) * start.x + smooth * end.x;
 		var dy = (1 - smooth) * start.y + smooth * end.y;
