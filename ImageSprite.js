@@ -31,6 +31,7 @@ class ImageSprite {
 	
 	draw() {
 		_context.save();
+		
 		var w = this.img.width * this.width * this.transform.scale.x;
 		var h = this.img.height * this.height * this.transform.scale.y;
 		var x = this.transform.position.x;

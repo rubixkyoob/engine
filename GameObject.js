@@ -10,6 +10,17 @@ class GameObject {
 		this.visible = true;
 	}
 	
+	getComponent(cmpt) {
+		if(this.components.length > 0) {
+			for(var c = 0; c < this.components.length; c++) {
+				if(this.components[c] instanceof cmpt) {
+					return this.components[c];
+				}
+			}
+		}
+		return null;
+	}
+	
 	addComponent(c) {
 		this.components.push(c);
 	}
@@ -34,12 +45,12 @@ class GameObject {
 		}
 	}
 	
-	render() {
+	render(camera) {
 		if(this.visible && this.components.length > 0) {
 			for(var c = 0; c < this.components.length; c++) {
 				// only call function if it exists
 				if(typeof this.components[c].draw == 'function') {
-					this.components[c].draw();
+					this.components[c].draw(camera);
 				}
 			}
 		}

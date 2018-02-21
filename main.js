@@ -18,6 +18,9 @@ function start() {
 	
 	// create a new scene from code
 	var newScene = new Scene(600, 400);
+	
+	newScene.camera.transform.position = new Vector2(500, 300);
+	
 	var go = new GameObject(50, 100);
 	//go.addComponent(new BoxSprite(50, 50, "#55b24e", go.transform));
 	go.addComponent(new ImageSprite("./Images/gnome.jpg", 0.1, 0.1, 0, 0, go.transform));
