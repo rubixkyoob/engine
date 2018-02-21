@@ -8,12 +8,12 @@ class Vector2 {
 		return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
 	}
 	
-	add(v) {
-		return new Vector2(this.x + v.x, this.y + v.y);
+	add(other) {
+		return new Vector2(this.x + other.x, this.y + other.y);
 	}
 	
-	subtract(v) {
-		return new Vector2(this.x - v.x, this.y - v.y);
+	subtract(other) {
+		return new Vector2(this.x - other.x, this.y - other.y);
 	}
 	
 	multiply(factor) {
@@ -26,8 +26,14 @@ class Vector2 {
 	}
 	
 	// returns the dot product of the current vector and the given vector
-	dotProduct(v) {
-		return (this.x * v.x) + (this.y * v.y);
+	dotProduct(other) {
+		return (this.x * other.x) + (this.y * other.y);
+	}
+	
+	// projection of this onto other
+	projection(other) {
+		var s = this.dotProduct(other) * other.dotProduct(other);
+		return other.multiply(s);
 	}
 	
 	static Lerp(start, end, smooth) {
