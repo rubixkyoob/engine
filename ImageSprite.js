@@ -1,7 +1,7 @@
 
 class ImageSprite {
-	constructor(s, w, h, ox, oy, t) {
-		this.transform = t;
+	constructor(s, w, h, ox, oy) {
+		
 		this.source = s;
 		
 		this.width = w;
@@ -32,13 +32,13 @@ class ImageSprite {
 	draw() {
 		_context.save();
 		
-		var w = this.img.width * this.width * this.transform.scale.x;
-		var h = this.img.height * this.height * this.transform.scale.y;
-		var x = this.transform.position.x;
-		var y = this.transform.position.y;
+		var w = this.img.width * this.width;
+		var h = this.img.height * this.height;
+		//var x = this.transform.position.x;
+		//var y = this.transform.position.y;
 		
-		_context.translate(x,y);
-		_context.rotate(this.transform.rotation * Math.PI / 180);
+		//_context.translate(x,y);
+		//_context.rotate(this.transform.rotation * Math.PI / 180);
 		
 		_context.drawImage(this.img, this.offsetX - (w * 0.5), this.offsetY - (h * 0.5), w, h);
 		_context.restore();

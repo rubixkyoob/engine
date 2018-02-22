@@ -18,16 +18,20 @@ function start() {
 	
 	// create a new scene from code
 	var newScene = new Scene(600, 400);
-	
-	newScene.camera.transform.position = new Vector2(500, 300);
+	var c = newScene.camera.getComponent(Camera);
+	c.viewport.x = 300;
+	//newScene.camera.addComponent(new TestScript(newScene.camera.transform));
 	
 	var go = new GameObject(50, 100);
 	//go.addComponent(new BoxSprite(50, 50, "#55b24e", go.transform));
-	go.addComponent(new ImageSprite("./Images/gnome.jpg", 0.1, 0.1, 0, 0, go.transform));
+	go.addComponent(new ImageSprite("./Images/gnome.jpg", 0.1, 0.1, 0, 0));
 	go.addComponent(new TestScript(go.transform));
 	//go.addComponent(new Physics(5, go.transform));
-	
 	newScene.addGameObject(go);
+	
+	var go2 = new GameObject(300, 250);
+	go2.addComponent(new BoxSprite(50, 50, "#55b24e"));
+	newScene.addGameObject(go2);
 	
 	scenes.push(newScene);
 	currScene = 0;

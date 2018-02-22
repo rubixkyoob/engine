@@ -1,7 +1,6 @@
 
 class Camera {
-	constructor(w, h, t) {
-		this.transform = t;
+	constructor(w, h) {
 		this.viewport = new Vector2(w, h);
 	}
 	

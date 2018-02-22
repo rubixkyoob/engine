@@ -45,28 +45,32 @@ class GameObject {
 		}
 	}
 	
-	render(camera) {
+	render() {
 		if(this.visible && this.components.length > 0) {
+			_context.save();
+			
+			// transform context to gameObject's transform
+			_context.setTransform(
+			this.transform.scale.x,		// horizontal scaling
+			0,							// horizontal skewing
+			0,							// vertical skewing
+			this.transform.scale.y,		// vertical scaling
+			this.transform.position.x,	// horizontal moving
+			this.transform.position.y	// vertical moving
+			)
+			_context.rotate(this.transform.rotation * Math.PI / 180);
+			
 			for(var c = 0; c < this.components.length; c++) {
-				// only call function if it exists
 				if(typeof this.components[c].draw == 'function') {
-					this.components[c].draw(camera);
+					this.components[c].draw();
 				}
 			}
+			_context.restore();
 		}
 	}
 	
 	get getId() {
 		return this.id;
 	}
-	//getTransform() {
-	//	if(this.components.length > 0) {
-	//		for(var c = 0; c < this.components.length; c++) {
-	//			if(this.components[c] instanceof Transform) {
-	//				return this.components[c];
-	//			}
-	//		}
-	//	}
-	//	return null;
-	//}
+	
 }
