@@ -43,12 +43,13 @@ function start() {
 function update() {
 	
 	$("#debug").text("FPS: " + calculateAverageFPS());
-	//console.log("tick:" + Time.time + " -> dt:" + Time.deltaTime);
+	
 	
 	scenes[currScene].update();
 	
 	scenes[currScene].render();
-	
+	$("#inputDebug").text(Input.GetKeyPressed(32));
+	Input.Clear();
 	Time.updateTime(new Date());
 	window.requestAnimationFrame(update);
 }
