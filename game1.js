@@ -16,7 +16,7 @@ function start() {
 	
 	// create a new scene from code
 	var newScene = new Scene(600, 400);
-	var imgOffset = new Vector2(50, -50);
+	var imgOffset = new Vector2(-100, -200);
 	var rubixkYAY = new GameObject(_canvas.width / 2 - 86, _canvas.height / 2);
 	rubixkYAY.addComponent(new ImageSprite("/Git/engine/Images/rubixkYAY_body.png", 0.25, 0.25, imgOffset.x, imgOffset.y, rubixkYAY.transform));
 	

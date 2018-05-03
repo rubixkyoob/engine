@@ -110,7 +110,13 @@ class Microphone {
 						avg = avg / max_index;
 						var angle = parent.min_angle + avg / 255 * (parent.max_angle - parent.min_angle);
 						console.log('angle: ' + angle);
-						parent.transform.rotation = -angle;
+						if(angle > (parent.max_angle - parent.min_angle) * 0.1) {
+							parent.transform.rotation = -angle;
+						}
+						else {
+							parent.transform.rotation = (1 - 0.5) * parent.transform.rotation + 0.5 * parent.min_angle;
+						}
+						
 					}
 				};
 			}
