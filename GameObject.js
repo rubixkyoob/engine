@@ -25,12 +25,21 @@ class GameObject {
 		this.components.push(c);
 	}
 	
+	addChild(go) {
+		this.children.push(go);
+	}
+	
 	start() {
 		if(this.components.length > 0) {
 			for(var c = 0; c < this.components.length; c++) {
 				if(typeof this.components[c].start == 'function') {
 					this.components[c].start();
 				}
+			}
+		}
+		if(this.children.length > 0) {
+			for(var c = 0; c < this.children.length; c++) {
+				this.children[c].start();
 			}
 		}
 	}
@@ -43,12 +52,18 @@ class GameObject {
 				}
 			}
 		}
+		
+		if(this.children.length > 0) {
+			for(var c = 0; c < this.children.length; c++) {
+				this.children[c].update();
+			}
+		}
 	}
 	
 	render() {
-		if(this.visible && this.components.length > 0) {
+		if(this.visible) {
 			_context.save();
-			
+			console.log("updating " + this.id);
 			// transform context to gameObject's transform
 			_context.setTransform(
 			this.transform.scale.x,		// horizontal scaling
@@ -60,11 +75,21 @@ class GameObject {
 			)
 			_context.rotate(this.transform.rotation * Math.PI / 180);
 			
-			for(var c = 0; c < this.components.length; c++) {
-				if(typeof this.components[c].draw == 'function') {
-					this.components[c].draw();
+			if(this.components.length > 0) {
+				for(var c = 0; c < this.components.length; c++) {
+					if(typeof this.components[c].draw == 'function') {
+						this.components[c].draw();
+					}
 				}
 			}
+			
+			
+			if(this.children.length > 0) {
+				for(var c = 0; c < this.children.length; c++) {
+					this.children[c].render();
+				}
+			}
+			
 			_context.restore();
 		}
 	}

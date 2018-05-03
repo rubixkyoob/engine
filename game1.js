@@ -13,19 +13,21 @@ var currScene = null;
 function start() {
 	//Initialize game engine
 	
+	var imagePath = "C:/Users/1272903/Downloads/engine-master (1)/engine-master/Images/";
 	
 	// create a new scene from code
 	var newScene = new Scene(600, 400);
 	var imgOffset = new Vector2(-100, -200);
 	var rubixkYAY = new GameObject(_canvas.width / 2 - 86, _canvas.height / 2);
-	rubixkYAY.addComponent(new ImageSprite("/Git/engine/Images/rubixkYAY_body.png", 0.25, 0.25, imgOffset.x, imgOffset.y, rubixkYAY.transform));
+	rubixkYAY.addComponent(new ImageSprite(imagePath + "rubixkYAY_body.png", 0.25, 0.25, imgOffset.x, imgOffset.y, rubixkYAY.transform));
 	
 	var rubixHead = new GameObject(_canvas.width / 2 - 86, _canvas.height / 2);
-	rubixHead.addComponent(new ImageSprite("/Git/engine/Images/rubixkYAY_head.png", 0.25, 0.25, imgOffset.x, imgOffset.y, rubixHead.transform));
+	rubixHead.addComponent(new ImageSprite(imagePath + "rubixkYAY_head.png", 0.25, 0.25, imgOffset.x, imgOffset.y, rubixHead.transform));
 	rubixHead.addComponent(new Microphone(0, 90, rubixHead.transform));
+	rubixkYAY.addChild(rubixHead);
 	
 	newScene.addGameObject(rubixkYAY);
-	newScene.addGameObject(rubixHead);
+	//newScene.addGameObject(rubixHead);
 	scenes.push(newScene);
 	currScene = 0;
 	

@@ -48,7 +48,7 @@ class Scene {
 		_context.scale(cam.viewport.x / _canvas.width, cam.viewport.y / _canvas.height);
 		// call each game Object draw method
 		for(var g = 0; g < this.gameObjects.length; g++) {
-			this.gameObjects[g].render(this.camera);
+			this.gameObjects[g].render();
 		}
 		_context.restore();
 	}
