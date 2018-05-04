@@ -28,7 +28,7 @@ class Microphone {
 								navigator.mozGetUserMedia || navigator.msGetUserMedia;
 		
 			if (navigator.getUserMedia){
-		
+				//console.log('getting user media...');
 				navigator.getUserMedia({audio:true}, 
 				function(stream) {
 					start_microphone(stream);
@@ -53,7 +53,7 @@ class Microphone {
 			}
 		
 			function start_microphone(stream){
-		
+			console.log('starting mic...');
 				gain_node = audioContext.createGain();
 				gain_node.connect( audioContext.destination );
 			
@@ -62,7 +62,16 @@ class Microphone {
 			
 				script_processor_node = audioContext.createScriptProcessor(BUFF_SIZE, 1, 1);
 				script_processor_node.onaudioprocess = process_microphone_buffer;
-			
+				
+				_canvas.addEventListener("click", function(){ 
+					if (audioContext.state === 'suspended') {
+						alert('in if');
+						audioContext.resume().then(function() {
+							alert('after resume' , audioContext.state);
+						});
+					} 
+				});
+				
 				microphone_stream.connect(script_processor_node);
 			
 				// --- enable volume control for output speakers
@@ -93,7 +102,7 @@ class Microphone {
 					// get the average for the first channel
 					var array = new Uint8Array(analyserNode.frequencyBinCount);
 					analyserNode.getByteFrequencyData(array);
-			
+					console.log('here');
 					// draw the spectrogram
 					if (microphone_stream.playbackState == microphone_stream.PLAYING_STATE) {
 			

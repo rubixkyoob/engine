@@ -13,7 +13,7 @@ var currScene = null;
 function start() {
 	//Initialize game engine
 	
-	var imagePath = "C:/Users/1272903/Downloads/engine-master (1)/engine-master/Images/";
+	var imagePath = "E:/Git/engine/Images/";
 	
 	// create a new scene from code
 	var newScene = new Scene(600, 400);
