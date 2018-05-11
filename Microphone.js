@@ -1,9 +1,10 @@
-/// test script
+/// Microphone component
 class Microphone {
-	constructor(min, max, t) {
-		this.transform = t;
-		this.min_angle = min;
-		this.max_angle = max;
+	constructor(ss) {
+		this.sampleSize = ss;
+		this.average = 0;
+		this.data = [];
+		this.enabled = true;
 	}
 	
 	start() {
@@ -65,9 +66,9 @@ class Microphone {
 				
 				_canvas.addEventListener("click", function(){ 
 					if (audioContext.state === 'suspended') {
-						alert('in if');
+						//alert('in if');
 						audioContext.resume().then(function() {
-							alert('after resume' , audioContext.state);
+							//alert('after resume' , audioContext.state);
 						});
 					} 
 				});
@@ -85,49 +86,41 @@ class Microphone {
 				});
 			
 				// --- setup FFT
-			
-				script_processor_fft_node = audioContext.createScriptProcessor(2048, 1, 1);
-				script_processor_fft_node.connect(gain_node);
-			
-				analyserNode = audioContext.createAnalyser();
-				analyserNode.smoothingTimeConstant = 0;
-				analyserNode.fftSize = 2048;
-			
-				microphone_stream.connect(analyserNode);
-			
-				analyserNode.connect(script_processor_fft_node);
+				if(parent.enabled) {
+					
+					script_processor_fft_node = audioContext.createScriptProcessor(2048, 1, 1);
+					script_processor_fft_node.connect(gain_node);
 				
-				script_processor_fft_node.onaudioprocess = function() {
-			
-					// get the average for the first channel
-					var array = new Uint8Array(analyserNode.frequencyBinCount);
-					analyserNode.getByteFrequencyData(array);
-					console.log('here');
-					// draw the spectrogram
-					if (microphone_stream.playbackState == microphone_stream.PLAYING_STATE) {
-			
-						var size_buffer = array.length;
-						var index = 0;
-						var max_index = 50;
-						var avg = 0;
-						
-						for (; index < max_index && index < size_buffer; index += 1) {
+					analyserNode = audioContext.createAnalyser();
+					analyserNode.smoothingTimeConstant = 0;
+					analyserNode.fftSize = 2048;
+				
+					microphone_stream.connect(analyserNode);
+				
+					analyserNode.connect(script_processor_fft_node);
+					
+					script_processor_fft_node.onaudioprocess = function() {
+				
+						// get the average for the first channel
+						var array = new Uint8Array(analyserNode.frequencyBinCount);
+						analyserNode.getByteFrequencyData(array);
+						parent.data = array;
+						// draw the spectrogram
+						if (microphone_stream.playbackState == microphone_stream.PLAYING_STATE) {
+							// calculate average
+							var size_buffer = array.length;
+							var index = 0;
+							var max_index = parent.sampleSize;
+							var total = 0;
 							
-							avg += array[index];
-							console.log(array[index]);
+							for (; index < max_index && index < size_buffer; index += 1) {
+								total += array[index];
+								console.log(array[index]);
+							}
+							parent.average = total / max_index;
 						}
-						avg = avg / max_index;
-						var angle = parent.min_angle + avg / 255 * (parent.max_angle - parent.min_angle);
-						console.log('angle: ' + angle);
-						if(angle > (parent.max_angle - parent.min_angle) * 0.1) {
-							parent.transform.rotation = -angle;
-						}
-						else {
-							parent.transform.rotation = (1 - 0.5) * parent.transform.rotation + 0.5 * parent.min_angle;
-						}
-						
-					}
-				};
+					};
+				}
 			}
 
 		}(); //  webaudio_tooling_obj = function()

@@ -29,6 +29,10 @@ class GameObject {
 		this.children.push(go);
 	}
 	
+	getChild(index) {
+		return this.children[index];
+	}
+	
 	start() {
 		if(this.components.length > 0) {
 			for(var c = 0; c < this.components.length; c++) {
@@ -63,7 +67,8 @@ class GameObject {
 	render() {
 		if(this.visible) {
 			_context.save();
-			console.log("updating " + this.id);
+			//console.log("updating " + this.id);
+			
 			// transform context to gameObject's transform
 			_context.setTransform(
 			this.transform.scale.x,		// horizontal scaling

@@ -18,12 +18,14 @@ function start() {
 	// create a new scene from code
 	var newScene = new Scene(600, 400);
 	var imgOffset = new Vector2(-100, -200);
-	var rubixkYAY = new GameObject(_canvas.width / 2 - 86, _canvas.height / 2);
-	rubixkYAY.addComponent(new ImageSprite(imagePath + "rubixkYAY_body.png", 0.25, 0.25, imgOffset.x, imgOffset.y, rubixkYAY.transform));
 	
 	var rubixHead = new GameObject(_canvas.width / 2 - 86, _canvas.height / 2);
 	rubixHead.addComponent(new ImageSprite(imagePath + "rubixkYAY_head.png", 0.25, 0.25, imgOffset.x, imgOffset.y, rubixHead.transform));
-	rubixHead.addComponent(new Microphone(0, 90, rubixHead.transform));
+	rubixHead.addComponent(new Microphone(100));
+	
+	var rubixkYAY = new GameObject(_canvas.width / 2 - 86, _canvas.height / 2);
+	rubixkYAY.addComponent(new ImageSprite(imagePath + "rubixkYAY_body.png", 0.25, 0.25, imgOffset.x, imgOffset.y, rubixkYAY.transform));
+	rubixkYAY.addComponent(new RubixkYAYController(rubixkYAY, 0, 90));
 	rubixkYAY.addChild(rubixHead);
 	
 	newScene.addGameObject(rubixkYAY);
@@ -44,6 +46,7 @@ function update() {
 	
 	scenes[currScene].render();
 	
+	Input.lateUpdate();
 	Time.updateTime(new Date());
 	window.requestAnimationFrame(update);
 }
