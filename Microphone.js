@@ -115,7 +115,7 @@ class Microphone {
 							
 							for (; index < max_index && index < size_buffer; index += 1) {
 								total += array[index];
-								console.log(array[index]);
+								//console.log(array[index]);
 							}
 							parent.average = total / max_index;
 						}

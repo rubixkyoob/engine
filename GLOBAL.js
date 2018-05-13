@@ -2,8 +2,9 @@
 
 var _canvas, 
 _context;
+_canvas = document.getElementById("mainCanvas");
 
 $(function() {
-	_canvas = document.getElementById("mainCanvas");
+	
 	_context = _canvas.getContext("2d");
 });

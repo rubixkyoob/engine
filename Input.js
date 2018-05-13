@@ -9,6 +9,7 @@ Input.keys = {};
 Input.key_pressed = {};
 Input.key_down = {};
 Input.key_released = {};
+Input.mouse_down = {};
 
 $(document).ready(function() {
 	
@@ -23,6 +24,11 @@ $(document).ready(function() {
 	window.addEventListener('onkeyup', function(e) {
 		console.log("keyup" + e.keyCode);
 		Input.keys[e.keyCode].released = true;
+	}, false);
+	
+	_canvas.addEventListener('mousedown', function(e) {
+		console.log('mousedown ' + e.button);
+		
 	}, false);
 });
 

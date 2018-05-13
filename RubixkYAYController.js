@@ -15,9 +15,12 @@ class RubixkYAYController {
 	
 	update() {
 		
-		// rotation
+		
+		
+		
+		// rotate head
 		var angle = this.min_angle + this.microphone.average / 255 * (this.max_angle - this.min_angle);
-		console.log('angle: ' + angle);
+		//console.log('angle: ' + angle);
 		if(angle > (this.max_angle - this.min_angle) * 0.1) {
 			this.head.transform.rotation = -angle;
 		}

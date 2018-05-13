@@ -8,7 +8,7 @@ var fpsInterval = 10;
 var fpsCounter = 1;
 
 var scenes = [];
-var currScene = null;
+var currScene = 0;
 
 function start() {
 	//Initialize game engine
@@ -26,10 +26,11 @@ function start() {
 	var rubixkYAY = new GameObject(_canvas.width / 2 - 86, _canvas.height / 2);
 	rubixkYAY.addComponent(new ImageSprite(imagePath + "rubixkYAY_body.png", 0.25, 0.25, imgOffset.x, imgOffset.y, rubixkYAY.transform));
 	rubixkYAY.addComponent(new RubixkYAYController(rubixkYAY, 0, 90));
+	rubixkYAY.addComponent(new ClickAndDrag(rubixkYAY));
 	rubixkYAY.addChild(rubixHead);
 	
 	newScene.addGameObject(rubixkYAY);
-	//newScene.addGameObject(rubixHead);
+	
 	scenes.push(newScene);
 	currScene = 0;
 	
@@ -46,7 +47,8 @@ function update() {
 	
 	scenes[currScene].render();
 	
-	Input.lateUpdate();
+	//update input after the scene
+	Input.update();
 	Time.updateTime(new Date());
 	window.requestAnimationFrame(update);
 }

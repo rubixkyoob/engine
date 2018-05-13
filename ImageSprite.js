@@ -30,7 +30,7 @@ class ImageSprite {
 	}
 	
 	draw() {
-		_context.save();
+		//_context.save();
 		
 		var w = this.img.width * this.width;
 		var h = this.img.height * this.height;
@@ -41,7 +41,7 @@ class ImageSprite {
 		//_context.rotate(this.transform.rotation * Math.PI / 180);
 		
 		_context.drawImage(this.img, this.offsetX, this.offsetY, w, h);
-		_context.restore();
+		//_context.restore();
 	}
 	
 }
