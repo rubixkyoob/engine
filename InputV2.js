@@ -72,7 +72,7 @@ var Input = (function getKeysInput(canvas,width,height) {
 	});
 	window.addEventListener("mousedown", function (e) {
 		var btn = e.button === 0 ? "leftMouse" : e.button === 1 ? "middleMouse" : "rightMouse";
-		console.log(btn, e);
+		//console.log(btn, e);
 		if (!keys[btn]) {
 			keysDown[btn] = true;
 		}

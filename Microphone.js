@@ -1,9 +1,11 @@
 /// Microphone component
 class Microphone {
-	constructor(ss) {
-		this.sampleSize = ss;
+	constructor(v, sl, sh) {
+		this.sampleLow = sl;
+		this.sampleHigh = sh;
 		this.average = 0;
 		this.data = [];
+		this.volume = v;
 		this.enabled = true;
 	}
 	
@@ -73,20 +75,22 @@ class Microphone {
 					} 
 				});
 				
-				microphone_stream.connect(script_processor_node);
+				//microphone_stream.connect(script_processor_node);
 			
 				// --- enable volume control for output speakers
 			
-				document.getElementById('volume').addEventListener('change', function() {
+				//document.getElementById('volume').addEventListener('change', function() {
 			
-					var curr_volume = this.value;
-					gain_node.gain.value = curr_volume;
+				//	var curr_volume = this.value;
+				//	gain_node.gain.value = curr_volume;
 			
-					console.log("curr_volume ", curr_volume);
-				});
+				//	console.log("curr_volume ", curr_volume);
+				//});
 			
 				// --- setup FFT
 				if(parent.enabled) {
+					
+					gain_node.gain.value = parent.volume;
 					
 					script_processor_fft_node = audioContext.createScriptProcessor(2048, 1, 1);
 					script_processor_fft_node.connect(gain_node);
@@ -109,8 +113,8 @@ class Microphone {
 						if (microphone_stream.playbackState == microphone_stream.PLAYING_STATE) {
 							// calculate average
 							var size_buffer = array.length;
-							var index = 0;
-							var max_index = parent.sampleSize;
+							var index = parent.sampleLow;
+							var max_index = parent.sampleHigh;
 							var total = 0;
 							
 							for (; index < max_index && index < size_buffer; index += 1) {
